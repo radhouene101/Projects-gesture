@@ -1,6 +1,6 @@
 package tn.bal.pi.entities;
 
-public enum Niveau {
+public enum TypeNiveau {
     PREMIERE,
     DEUXIEME,
     TROIXIEME,
