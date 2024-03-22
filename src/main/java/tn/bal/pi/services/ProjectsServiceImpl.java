@@ -37,4 +37,19 @@ public class ProjectsServiceImpl implements IProjectsService{
         projectsRepository.deleteById(id);
         System.out.println("project with id " +id + "deleted");
     }
+
+    @Override
+    public List<Projects> getIsNominated() {
+        return projectsRepository.findAllByNominatedIsTrue();
+    }
+
+    @Override
+    public List<Projects> currentlyNominated() {
+        return null;
+    }
+
+    @Override
+    public List<Projects> winners() {
+        return null;
+    }
 }

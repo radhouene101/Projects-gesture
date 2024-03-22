@@ -10,4 +10,8 @@ public interface IProjectsService {
     Projects addProject(Projects p);
     Projects updateProject(Projects p);
     void deleteProjectById(Long id);
+    List<Projects> getIsNominated();
+    List<Projects> currentlyNominated();
+    List<Projects> winners();
+
 }

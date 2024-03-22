@@ -9,8 +9,8 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class CategoryProjectServiceImpl implements ICategoryProjectsService {
-    CategoryProjectsRepository categoryProjectsRepository;
+public class CategoryProjectsServiceImpl implements ICategoryProjectsService {
+    private  final CategoryProjectsRepository categoryProjectsRepository;
     @Override
     public List<CategoryProjects> getAllCategories() {
         return categoryProjectsRepository.findAll();

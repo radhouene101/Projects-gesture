@@ -23,12 +23,14 @@ public class Projects  {
     private String nom;
     @Column(name="group_project")
     private String group;
-    @Column(name="is_nominated")
+    @Column(name="nominated")
     private boolean isNominated;
     @Column(name="submit_date")
     private Date date;
     @Column(name="vote_number")
     private int numberOfVotes;
+    @Column(name = "groupStreak")
+    private int groupStreak;
     @Column(name="winner")
     private boolean winner;
     @Enumerated(EnumType.STRING)
@@ -37,6 +39,7 @@ public class Projects  {
     private Option optionSpeciality;
     @ManyToOne
     private CategoryProjects category;
+    private String coach;
 
 
 
