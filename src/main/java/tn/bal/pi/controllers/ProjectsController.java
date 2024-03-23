@@ -2,8 +2,10 @@ package tn.bal.pi.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.bal.pi.entities.Projects;
+import tn.bal.pi.dto.ProjectsDto;
+
 import tn.bal.pi.services.IProjectsService;
 
 import java.util.ArrayList;
@@ -14,48 +16,56 @@ import java.util.List;
 @AllArgsConstructor
 public class ProjectsController {
     @Autowired
-    IProjectsService iProjectsService;
+    IProjectsService service;
     @GetMapping
-    public List<Projects> getAllProjects(){
-        return iProjectsService.getAllProjects();
+    public ResponseEntity<List<ProjectsDto>> getAllProjects() {
+        return ResponseEntity
+                .ok(service.findAll());
     }
     @GetMapping("/{id}")
-    public Projects getProjectById(@PathVariable Long id){
-        return iProjectsService.getProjectById(id);
+    public ResponseEntity<ProjectsDto> getProjectById(@PathVariable Long id){
+        return ResponseEntity
+                .ok( service.findById(id));
     }
     @PostMapping
-    public Projects addProject(@RequestBody Projects p){
-        return iProjectsService.addProject(p);
+    public ResponseEntity<ProjectsDto> addProject(@RequestBody ProjectsDto p){
+        return ResponseEntity
+                .ok(service.save(p));
     }
-    @PostMapping("/update")
-    public Projects updateProject(@RequestBody Projects p){
-        return iProjectsService.updateProject(p);
-    }
+   /* @PostMapping("/update")
+    public ProjectsDto updateProject(@RequestBody ProjectsDto p){
+        return service.updateProject(p);
+    }*/
     @DeleteMapping("/{id}")
-    public void deleteProject(@PathVariable Long id){
-        iProjectsService.deleteProjectById(id);
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id){
+
+        service.delete(id);
+        return ResponseEntity.ok().build();
     }
     @GetMapping("/nominated")
-    public List<Projects> getNominatedProjects(){
-        return iProjectsService.getIsNominated(true);
+    public ResponseEntity<List<ProjectsDto>> getNominatedProjects(){
+        return ResponseEntity.ok(
+                service.getIsNominated(true));
     }
 
     @GetMapping("/scolar-year/{scolarYear}")
-    public List<Projects> getAllWinnersByYear(@PathVariable String scolarYear){
-        return iProjectsService.getAllwinnersByYear(scolarYear,true);
+    public ResponseEntity<List<ProjectsDto>> getAllWinnersByYear(@PathVariable String scolarYear){
+        return ResponseEntity
+                .ok(service.getAllwinnersByYear(scolarYear,true));
     }
     @GetMapping("/scolar-year")
-    public List<Projects> getAllWinners(boolean b){
-        return iProjectsService.getAllWinners(true);
+    public ResponseEntity<List<ProjectsDto>> getAllWinners(boolean b){
+        return ResponseEntity
+                .ok(service.getAllWinners(true));
     }
     @GetMapping("/hall-of-fame-groups")
-    public List<String> getGroupsByWinningSteak(Integer steakValue){
-        List<Projects>  p;
-        p= iProjectsService.getGroupsByWinningSteak(0);
+    public ResponseEntity<List<String>> getGroupsByWinningSteak(Integer steakValue){
+        List<ProjectsDto>  p;
+        p= service.getGroupsByWinningSteak(0);
         List<String> listOfGroupNames= new ArrayList<>();
-        for (Projects pr:p){
+        for (ProjectsDto pr:p){
             listOfGroupNames.add(pr.getGroup());
         }
-        return  listOfGroupNames;
+        return  ResponseEntity.ok(listOfGroupNames);
     }
 }

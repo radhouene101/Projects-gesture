@@ -1,6 +1,9 @@
 package tn.bal.pi.dto;
 
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,9 +14,19 @@ import tn.bal.pi.entities.CategoryProjects;
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class CategoryProjectsDto {
+    @NotBlank(message = "id should not be blank")
+    @NotNull(message = "id should not be Null")
+    @NotEmpty(message = "id should Not be Empty!")
     private Long id;
+    @NotBlank(message = "nom should not be blank")
+    @NotNull(message = "nom should not be Null")
+    @NotEmpty(message = "nom should Not be Empty!")
     private String nom;
+    @NotBlank(message = "description should not be blank")
+    @NotNull(message = "description should not be Null")
+    @NotEmpty(message = "description should Not be Empty!")
     private String description;
     public static CategoryProjectsDto fromEntity(CategoryProjects categoryProjects){
         return CategoryProjectsDto.builder()

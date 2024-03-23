@@ -1,22 +1,45 @@
 package tn.bal.pi.controllers;
 
-import lombok.AllArgsConstructor;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import tn.bal.pi.entities.User;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import tn.bal.pi.dto.UserDto;
 import tn.bal.pi.services.IUserService;
 
+import java.util.List;
+
 @RestController
-@AllArgsConstructor
-@RequestMapping("user")
+@RequiredArgsConstructor
+@RequestMapping("users")
 public class UserController {
     @Autowired
-    IUserService iUserService;
+    private final IUserService service;
     @PostMapping
-    public User saveUser(@RequestBody User user){
-        return iUserService.saveUser(user);
+    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto user){
+        return ResponseEntity.ok(service.save(user));
     }
+    @GetMapping
+    public ResponseEntity<List<UserDto>> findAll(){
+        return ResponseEntity.ok(service.findAll());
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> findById(@PathVariable Long id){
+        return ResponseEntity.ok(service.findById(id));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+            service.delete(id);
+            return ResponseEntity.ok().build();
+    }
+    @PatchMapping("/validate-user/{id}")
+    public ResponseEntity<Long> validateAccount(@PathVariable Long id){
+        return ResponseEntity.ok(service.validateAccount(id));
+    }
+    @PatchMapping("/invalidate-user/{id}")
+    public ResponseEntity<Long> invalidateAccount(@PathVariable Long id){
+        return ResponseEntity.ok(service.invalidateAccount(id));
+    }
+
 }

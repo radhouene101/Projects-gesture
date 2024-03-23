@@ -8,16 +8,17 @@ import java.util.Date;
 import java.util.List;
 
 
+
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "projects")
 @Builder
 public class Projects  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idProject")
+    @Column(name="project_id")
     private Long id;
     @Column(name="name")
     private String nom;
@@ -40,7 +41,7 @@ public class Projects  {
     private Option optionSpeciality;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private CategoryProjects category;
+    private CategoryProjects categories;
     private String coach;
     private boolean votingpool;
     private String scolarYear;

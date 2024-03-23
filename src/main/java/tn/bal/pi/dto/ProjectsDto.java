@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 import tn.bal.pi.entities.*;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -59,7 +62,7 @@ public class ProjectsDto {
                 .id(projects.getId())
                 .user(User.builder()
                         .id(projects.getUserId()).build())
-                .category(CategoryProjects
+                .categories(CategoryProjects
                         .builder()
                         .id(projects.getId())
                         .build())

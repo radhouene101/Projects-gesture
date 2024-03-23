@@ -24,6 +24,7 @@ public class User {
     private String password;
     private Role role;
     private String fullname;
+    private boolean validate;
     @OneToMany(mappedBy = "user")
     private List<Projects> listprojects;
 }
