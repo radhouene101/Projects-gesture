@@ -13,20 +13,20 @@ import tn.bal.pi.entities.Option;
 @AllArgsConstructor
 public class OptionDto {
     private Long id;
-    private String nom;
+    private String name;
     private String description;
     public static OptionDto fromEntity(Option option){
         return OptionDto.builder()
                 .id(option.getId())
                 .description(option.getDescription())
-                .nom(option.getNom())
+                .name(option.getName())
                 .build();
     }
     public static Option toEntity(OptionDto option){
         return Option.builder()
                 .id(option.getId())
                 .description(option.getDescription())
-                .nom(option.getNom())
+                .name(option.getName())
                 .build();
     }
 }

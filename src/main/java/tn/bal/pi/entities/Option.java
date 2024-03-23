@@ -17,7 +17,7 @@ public class Option {
     @Column(name = "idOption")
     private Long id;
     @Column(name = "name")
-    private String nom;
+    private String name;
     @Column(name = "description")
     private String description;
 }

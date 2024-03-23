@@ -3,14 +3,13 @@ package tn.bal.pi.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 
 
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,12 +17,12 @@ import java.util.List;
 public class Projects  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="project_id")
+    @Column(name="idProject")
     private Long id;
     @Column(name="name")
-    private String nom;
-    @Column(name="group_project")
-    private String group;
+    private String name;
+    @Column(name="group_name")
+    private String groupName;
     @Column(name="nominated")
     private boolean nominated;
     @Column(name="submit_date")
@@ -41,7 +40,7 @@ public class Projects  {
     private Option optionSpeciality;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private CategoryProjects categories;
+    private CategoryProjects category;
     private String coach;
     private boolean votingpool;
     private String scolarYear;

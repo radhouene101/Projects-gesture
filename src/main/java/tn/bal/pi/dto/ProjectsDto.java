@@ -18,8 +18,8 @@ import java.util.List;
 @Builder
 public class ProjectsDto {
     private Long id;
-    private String nom;
-    private String group;
+    private String name;
+    private String groupName;
     private boolean nominated;
     private Date date;
     private int numberOfVotes;
@@ -40,8 +40,8 @@ public class ProjectsDto {
                         .builder()
                         .id(projects.getId())
                         .build())
-                .nom(projects.getNom())
-                .group(projects.getGroup())
+                .name(projects.getName())
+                .groupName(projects.getGroupName())
                 .nominated(projects.isNominated())
                 .date(projects.getDate())
                 .optionSpeciality(Option.builder()
@@ -62,12 +62,12 @@ public class ProjectsDto {
                 .id(projects.getId())
                 .user(User.builder()
                         .id(projects.getUserId()).build())
-                .categories(CategoryProjects
+                .category(CategoryProjects
                         .builder()
                         .id(projects.getId())
                         .build())
-                .nom(projects.getNom())
-                .group(projects.getGroup())
+                .name(projects.getName())
+                .groupName(projects.getGroupName())
                 .nominated(projects.isNominated())
                 .date(projects.getDate())
                 .optionSpeciality(Option.builder()

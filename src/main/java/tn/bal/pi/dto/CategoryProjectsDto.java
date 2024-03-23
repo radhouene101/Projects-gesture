@@ -23,7 +23,7 @@ public class CategoryProjectsDto {
     @NotBlank(message = "nom should not be blank")
     @NotNull(message = "nom should not be Null")
     @NotEmpty(message = "nom should Not be Empty!")
-    private String nom;
+    private String name;
     @NotBlank(message = "description should not be blank")
     @NotNull(message = "description should not be Null")
     @NotEmpty(message = "description should Not be Empty!")
@@ -31,14 +31,14 @@ public class CategoryProjectsDto {
     public static CategoryProjectsDto fromEntity(CategoryProjects categoryProjects){
         return CategoryProjectsDto.builder()
                 .id(categoryProjects.getId())
-                .nom(categoryProjects.getNom())
+                .name(categoryProjects.getName())
                 .description(categoryProjects.getDescription())
                 .build();
     }
     public static CategoryProjects toEntity(CategoryProjectsDto categoryProjects){
         return CategoryProjects.builder()
                 .id(categoryProjects.getId())
-                .nom(categoryProjects.getNom())
+                .name(categoryProjects.getName())
                 .description(categoryProjects.getDescription())
                 .build();
     }

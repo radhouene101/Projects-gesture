@@ -64,7 +64,7 @@ public class ProjectsController {
         p= service.getGroupsByWinningSteak(0);
         List<String> listOfGroupNames= new ArrayList<>();
         for (ProjectsDto pr:p){
-            listOfGroupNames.add(pr.getGroup());
+            listOfGroupNames.add(pr.getGroupName());
         }
         return  ResponseEntity.ok(listOfGroupNames);
     }

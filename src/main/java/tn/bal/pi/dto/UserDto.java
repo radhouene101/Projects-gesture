@@ -1,12 +1,11 @@
 package tn.bal.pi.dto;
 
-import jakarta.persistence.UniqueConstraint;
+
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 import tn.bal.pi.entities.User;
 
 @Getter
@@ -14,8 +13,9 @@ import tn.bal.pi.entities.User;
 @AllArgsConstructor
 @Builder
 public class UserDto {
-
     private Long id;
+
+
     @Email
     @NotBlank(message = "email should not be blank")
     @NotNull(message = "email should not be Null")
