@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.bal.pi.entities.Projects;
 import tn.bal.pi.services.IProjectsService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -36,6 +37,25 @@ public class ProjectsController {
     }
     @GetMapping("/nominated")
     public List<Projects> getNominatedProjects(){
-        return iProjectsService.getIsNominated();
+        return iProjectsService.getIsNominated(true);
+    }
+
+    @GetMapping("/scolar-year/{scolarYear}")
+    public List<Projects> getAllWinnersByYear(@PathVariable String scolarYear){
+        return iProjectsService.getAllwinnersByYear(scolarYear,true);
+    }
+    @GetMapping("/scolar-year")
+    public List<Projects> getAllWinners(boolean b){
+        return iProjectsService.getAllWinners(true);
+    }
+    @GetMapping("/hall-of-fame-groups")
+    public List<String> getGroupsByWinningSteak(Integer steakValue){
+        List<Projects>  p;
+        p= iProjectsService.getGroupsByWinningSteak(0);
+        List<String> listOfGroupNames= new ArrayList<>();
+        for (Projects pr:p){
+            listOfGroupNames.add(pr.getGroup());
+        }
+        return  listOfGroupNames;
     }
 }

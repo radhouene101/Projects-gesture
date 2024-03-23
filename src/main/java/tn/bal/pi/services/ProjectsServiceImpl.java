@@ -1,15 +1,20 @@
 package tn.bal.pi.services;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.bal.pi.entities.Projects;
+import tn.bal.pi.entities.TypeNiveau;
 import tn.bal.pi.repositories.ProjectsRepository;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class ProjectsServiceImpl implements IProjectsService{
+    @Autowired
     ProjectsRepository projectsRepository;
     @Override
     public List<Projects> getAllProjects() {
@@ -39,8 +44,8 @@ public class ProjectsServiceImpl implements IProjectsService{
     }
 
     @Override
-    public List<Projects> getIsNominated() {
-        return projectsRepository.findAllByNominatedIsTrue();
+    public List<Projects> getIsNominated(boolean b) {
+        return projectsRepository.findAllByNominated(b);
     }
 
     @Override
@@ -48,8 +53,36 @@ public class ProjectsServiceImpl implements IProjectsService{
         return null;
     }
 
+    public List<Projects> getAllWinners(boolean b){
+        return projectsRepository.findAllByWinner(b);
+    }
     @Override
-    public List<Projects> winners() {
+    public List<Projects> getAllwinnersByYear(String scolarYear,boolean b) {
+        return projectsRepository.findAllByWinnerAndAndScolarYear(b,scolarYear);
+    }
+
+    @Override
+    public List<Projects> getGroupsByWinningSteak(Integer streakValue) {
+        return projectsRepository.findGroupByGroupStreakGreaterThanOrderByGroupStreak(streakValue);
+    }
+
+    @Override
+    public List<Projects> getByCoach(String coach) {
+        return null;
+    }
+
+    @Override
+    public List<Projects> getAllByCategory(String category) {
+        return null;
+    }
+
+    @Override
+    public List<Projects> getAllByOptionSpeciality(String option) {
+        return null;
+    }
+
+    @Override
+    public List<Projects> getAllByNiveau(TypeNiveau niveau) {
         return null;
     }
 }

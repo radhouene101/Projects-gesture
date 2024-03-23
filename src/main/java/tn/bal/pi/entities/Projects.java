@@ -24,7 +24,7 @@ public class Projects  {
     @Column(name="group_project")
     private String group;
     @Column(name="nominated")
-    private boolean isNominated;
+    private boolean nominated;
     @Column(name="submit_date")
     private Date date;
     @Column(name="vote_number")
@@ -40,6 +40,8 @@ public class Projects  {
     @ManyToOne
     private CategoryProjects category;
     private String coach;
+    private boolean votingpool;
+    private String scolarYear;
 
 
 

@@ -1,2 +1,4 @@
-package tn.bal.pi.dto;public class UserDto {
+package tn.bal.pi.dto;
+
+public class UserDto {
 }
