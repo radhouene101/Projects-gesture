@@ -36,12 +36,18 @@ public class Projects  {
     @Enumerated(EnumType.STRING)
     private TypeNiveau niveau;
     @ManyToOne
+    @JoinColumn(name = "option_id")
     private Option optionSpeciality;
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private CategoryProjects category;
     private String coach;
     private boolean votingpool;
     private String scolarYear;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private  User user;
 
 
 

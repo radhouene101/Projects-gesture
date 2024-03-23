@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Entity
 @Table(name ="users",uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -21,4 +24,6 @@ public class User {
     private String password;
     private Role role;
     private String fullname;
+    @OneToMany(mappedBy = "user")
+    private List<Projects> listprojects;
 }
