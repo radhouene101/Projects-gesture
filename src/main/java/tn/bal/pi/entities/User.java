@@ -27,6 +27,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
     private String password;
+    @OneToOne
     private Role role;
     private String fullname;
     private boolean active;
@@ -36,7 +37,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
+        return Collections.singletonList(new SimpleGrantedAuthority(role.getName()));
     }
 
     @Override

@@ -55,4 +55,11 @@ public class GlobalExceptionHandler {
                 .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(representation);
     }
+    /*@ExceptionHandler(ClassNotFoundException.class)
+    public ResponseEntity<ExceptionRepresentation> classNotFoundException(ClassNotFoundException exception){
+        ExceptionRepresentation representation =  ExceptionRepresentation.builder()
+                .errorMessage(exception.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(representation);
+    }*/
 }
