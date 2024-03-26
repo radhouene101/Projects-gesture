@@ -1,6 +1,7 @@
 package tn.bal.pi.handlers;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,12 @@ public class GlobalExceptionHandler {
                 .build();
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
                 .body(representation);
+    }
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ExceptionRepresentation> dataIntegrityViolationException(){
+        ExceptionRepresentation representation = ExceptionRepresentation.builder()
+                .errorMessage("a user already exist with that email")
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(representation);
     }
 }

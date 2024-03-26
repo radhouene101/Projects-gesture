@@ -51,7 +51,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Long validateAccount(Long id) {
-        User user = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("no user exist with id "+id));
+        User user = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("no user exist with id : "+id));
         user.setValidate(true);
         repository.save(user);
         return user.getId();
@@ -59,7 +59,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Long invalidateAccount(Long id) {
-        User user = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("no user exist with id "+id));
+        User user = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("no user exist with id : "+id));
         user.setValidate(false);
         repository.save(user);
         return user.getId();

@@ -14,9 +14,7 @@ import tn.bal.pi.entities.User;
 @Builder
 public class UserDto {
     private Long id;
-
-
-    @Email
+    @Email(message = "email n'est pas conforme")
     @NotBlank(message = "email should not be blank")
     @NotNull(message = "email should not be Null")
     @NotEmpty(message = "email should Not be Empty!")
@@ -24,7 +22,7 @@ public class UserDto {
     @NotBlank(message = "password should not be blank")
     @NotNull(message = "password should not be Null")
     @NotEmpty(message = "password should Not be Empty!")
-    @Size(min = 2 , max = 32)
+    @Size(min = 2 , max = 32 ,message = "password length should be min:2 and max:32 characters")
     private String password;
     @NotBlank(message = "fullname should not be blank")
     @NotNull(message = "fullname should not be Null")

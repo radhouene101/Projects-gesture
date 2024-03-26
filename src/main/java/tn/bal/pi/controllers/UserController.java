@@ -22,11 +22,13 @@ public class UserController {
     }
     @GetMapping
     public ResponseEntity<List<UserDto>> findAll(){
-        return ResponseEntity.ok(service.findAll());
+        return ResponseEntity.
+                ok(service.findAll());
     }
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable Long id){
-        return ResponseEntity.ok(service.findById(id));
+        return ResponseEntity.
+                ok(service.findById(id));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
