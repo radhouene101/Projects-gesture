@@ -7,4 +7,6 @@ public interface IUserService extends AbstractService<UserDto>{
 
     Long validateAccount(Long id);
     Long invalidateAccount(Long id);
+
+    AuthenticationResponse register(UserDto userDto);
 }
