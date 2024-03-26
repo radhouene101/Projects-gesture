@@ -3,8 +3,8 @@ package tn.bal.pi.handlers;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import tn.bal.pi.exceptions.ObjectValidationException;
@@ -47,5 +47,12 @@ public class GlobalExceptionHandler {
                 .errorMessage("a user already exist with that email")
                 .build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(representation);
+    }
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ExceptionRepresentation> usernameNotFoundException(UsernameNotFoundException exception){
+        ExceptionRepresentation representation =  ExceptionRepresentation.builder()
+                .errorMessage(exception.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(representation);
     }
 }
