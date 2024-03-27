@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                              //request.requestMatchers(new AntPathRequestMatcher("**/PI/auth/register"))
 
-                                .requestMatchers("/**",
+                                .requestMatchers(
                                                 "/swagger-ui/**",
                                                 "/auth/**",
                                                 "/auth/authenticate",
@@ -44,7 +44,7 @@ public class SecurityConfig {
                                                 "/configuration/ui",
                                                 "/configuration/security",
                                                 "/webjars/**",
-                                                "/swagger-ui.html")
+                                                "/swagger-ui")
                                         .permitAll()
                                         .anyRequest()
                                         .authenticated()
