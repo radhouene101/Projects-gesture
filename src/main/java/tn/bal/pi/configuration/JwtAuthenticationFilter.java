@@ -21,37 +21,41 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter  extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private static final String BEARER ="Bearer " ;
-    @Autowired
     private final JwtUtils jwtUtils;
     private final UserRepository userRepository;
-    private final String AUTHORIZATION="Authorization";
+
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String BEARER = "Bearer ";
+
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
-        String authHeader= request.getHeader(AUTHORIZATION);
-        String useremail;
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
+    ) throws ServletException, IOException {
+        String authHeader = request.getHeader(AUTHORIZATION);
+        String userEmail;
         String jwt;
-        if(authHeader==null && !authHeader.startsWith(BEARER)){
-            filterChain.doFilter(request,response);
+
+        if (authHeader == null || !authHeader.startsWith(BEARER)) {
+            filterChain.doFilter(request, response);
             return;
         }
-        jwt=authHeader.substring(7);
-        useremail= jwtUtils.extractUsername(jwt);
-        if(useremail!=null && SecurityContextHolder.getContext().getAuthentication()==null){
-            UserDetails userDetails = userRepository.findByEmail(useremail)
-                    .orElseThrow(()-> new UsernameNotFoundException("no user was found while validating the jwt"));//we can change exception to entityNotFoundException
-            if(jwtUtils.isTokenValid(jwt,userDetails)){
+
+        jwt = authHeader.substring(7);
+        userEmail = jwtUtils.extractUsername(jwt);
+        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = userRepository.findByEmail(userEmail)
+                    .orElseThrow(() -> new EntityNotFoundException("User not found while validation JWT"));
+            if (jwtUtils.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-                        = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+                        = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
-
-
+        filterChain.doFilter(request, response);
     }
 }

@@ -1,11 +1,11 @@
 package tn.bal.pi.services.impl;
 
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tn.bal.pi.configuration.JwtUtils;
@@ -24,9 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements IUserService {
+    private static final String ROLE_USER = "ROLE_USER";
     @Autowired
     private final UserRepository repository;
     @Autowired
@@ -84,20 +85,19 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public AuthenticationResponse register(UserDto dto) {
         validator.validate(dto);
         User user = UserDto.toEntity(dto);
-        repository.save(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        findOrCreateRole("ROLE_USER");
-        user.setRole(Role.builder()
-                .name("ROLE_USER")
-                .build());
+        user.setRole(
+                findOrCreateRole(ROLE_USER)
+        );
         var savedUser = repository.save(user);
-        Map<String,Object> claims = new HashMap<>();
-        claims.put("userId",savedUser.getId());
-        claims.put("fullName",savedUser.getFullname());
-        String token = jwtUtils.generateToken(savedUser,claims);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", savedUser.getId());
+        claims.put("fullName", savedUser.getFullname());
+        String token = jwtUtils.generateToken(savedUser, claims);
         return AuthenticationResponse.builder()
                 .token(token)
                 .build();
