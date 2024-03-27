@@ -16,9 +16,6 @@ import tn.bal.pi.entities.CategoryProjects;
 @AllArgsConstructor
 
 public class CategoryProjectsDto {
-    @NotBlank(message = "id should not be blank")
-    @NotNull(message = "id should not be Null")
-    @NotEmpty(message = "id should Not be Empty!")
     private Long id;
     @NotBlank(message = "nom should not be blank")
     @NotNull(message = "nom should not be Null")

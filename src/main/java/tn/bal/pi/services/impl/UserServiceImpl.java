@@ -104,15 +104,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public AuthenticationResponse authenticate(AuthenticationRequest req) {
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(req.getEmail(),req.getPassword())
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
-        final User user = repository.findByEmail(req.getEmail()).get();
-        Map<String,Object> claims = new HashMap<>();
-        claims.put("userId",user.getId());
-        claims.put("fullName",user.getFullname());
-        final String token =jwtUtils.generateToken(user,claims);
+        final User user = repository.findByEmail(request.getEmail()).get();
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        claims.put("fullName", user.getFullname());
+        final String token = jwtUtils.generateToken(user, claims);
         return AuthenticationResponse.builder()
                 .token(token)
                 .build();
