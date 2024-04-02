@@ -58,10 +58,10 @@ public class ProjectsController {
         return ResponseEntity
                 .ok(service.getAllWinners(true));
     }
-    @GetMapping("/hall-of-fame-groups")
-    public ResponseEntity<List<String>> getGroupsByWinningSteak(Integer steakValue){
+    @GetMapping("/hall-of-fame-groups/{streakValue}")
+    public ResponseEntity<List<String>> getGroupsByWinningSteak(@PathVariable Integer streakValue){
         List<ProjectsDto>  p;
-        p= service.getGroupsByWinningSteak(0);
+        p= service.getGroupsByWinningSteak(streakValue);
         List<String> listOfGroupNames= new ArrayList<>();
         for (ProjectsDto pr:p){
             listOfGroupNames.add(pr.getGroupName());

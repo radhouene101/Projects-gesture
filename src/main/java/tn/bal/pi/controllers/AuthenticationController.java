@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import tn.bal.pi.configuration.JwtUtils;
 import tn.bal.pi.dto.AuthenticationRequest;
 import tn.bal.pi.dto.AuthenticationResponse;
@@ -17,7 +18,7 @@ import tn.bal.pi.dto.UserDto;
 import tn.bal.pi.repositories.UserRepository;
 import tn.bal.pi.services.IUserService;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthenticationController {
