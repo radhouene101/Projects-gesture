@@ -36,7 +36,7 @@ public class ProjectsDto {
     public static ProjectsDto fromEntity(Projects projects){
         return ProjectsDto.builder()
                 .id(projects.getId())
-                .category(CategoryProjects
+                .category(CategoryProjects //--- to be checked again
                         .builder()
                         .id(projects.getId())
                         .build())

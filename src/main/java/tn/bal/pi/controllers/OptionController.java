@@ -1,5 +1,6 @@
 package tn.bal.pi.controllers;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("options")
+@Tag(name = "options")
+
 public class OptionController {
     @Autowired
     IOptionService service;

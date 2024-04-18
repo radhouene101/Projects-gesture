@@ -35,6 +35,7 @@ public class SecurityConfig {
                              //request.requestMatchers(new AntPathRequestMatcher("**/PI/auth/register"))
 
                                 .requestMatchers(
+                                                    "/**",
                                                 "/swagger-ui/**",
                                                 "/auth/**",
                                                 "/auth/authenticate",

@@ -1,5 +1,7 @@
 package tn.bal.pi.controllers;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import java.util.List;
 @RestController
 @FieldDefaults(level = AccessLevel.PUBLIC)
 @RequestMapping("category-projects")
+@Tag(name = "category")
 public class CategoryProjectsController {
     @Autowired
     ICategoryProjectsService iCategoryProjectsService;
