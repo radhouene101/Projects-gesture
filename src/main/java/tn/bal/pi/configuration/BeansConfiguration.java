@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 public class BeansConfiguration {
+    //in
     private final UserDetailsService userDetailsService;
 
     @Bean
