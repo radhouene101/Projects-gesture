@@ -22,6 +22,8 @@ public class CategoryProjects {
     private String name;
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "categoriesProjects",cascade = CascadeType.ALL)
+    @ManyToMany
     private List<SousCategory> sousCategories;
+//    @OneToMany(mappedBy = "categoriesProjects",cascade = CascadeType.ALL)
+//    private List<SousCategory> sousCategories;
 }

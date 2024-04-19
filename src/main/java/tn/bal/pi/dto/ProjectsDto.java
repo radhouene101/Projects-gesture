@@ -36,10 +36,7 @@ public class ProjectsDto {
     public static ProjectsDto fromEntity(Projects projects){
         return ProjectsDto.builder()
                 .id(projects.getId())
-                .category(CategoryProjects //--- to be checked again
-                        .builder()
-                        .id(projects.getId())
-                        .build())
+                .category(projects.getCategory())
                 .name(projects.getName())
                 .groupName(projects.getGroupName())
                 .nominated(projects.isNominated())
@@ -62,10 +59,7 @@ public class ProjectsDto {
                 .id(projects.getId())
                 .user(User.builder()
                         .id(projects.getUserId()).build())
-                .category(CategoryProjects
-                        .builder()
-                        .id(projects.getId())
-                        .build())
+                .category(projects.getCategory())
                 .name(projects.getName())
                 .groupName(projects.getGroupName())
                 .nominated(projects.isNominated())

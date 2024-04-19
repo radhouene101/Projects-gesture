@@ -19,7 +19,7 @@ public class SousCategory {
     private String nom;
     @Column(name = "description")
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "sousCategories")
-    private CategoryProjects categoriesProjects;
+//    @ManyToOne
+//    @JoinColumn(name = "sousCategories")
+//    private CategoryProjects categoriesProjects;
 }

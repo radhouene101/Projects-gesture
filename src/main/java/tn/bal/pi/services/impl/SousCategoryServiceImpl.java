@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class SousCategoryServiceImpl implements ISousCategoryService {
-    SousCategoryRepository repository;
+    @Autowired
+    private final SousCategoryRepository repository;
     @Autowired
     private  final ObjectsValidator validator;
 
@@ -46,7 +47,7 @@ public class SousCategoryServiceImpl implements ISousCategoryService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
-    
+
 
 
 }
