@@ -32,18 +32,16 @@ public class ProjectsDto {
     private boolean votingpool;
     private String scolarYear;
     private Long userId;
+    private String classe;
 
     public static ProjectsDto fromEntity(Projects projects){
         return ProjectsDto.builder()
                 .id(projects.getId())
-                .category(projects.getCategory())
                 .name(projects.getName())
                 .groupName(projects.getGroupName())
                 .nominated(projects.isNominated())
+                .classe(projects.getClasse())
                 .date(projects.getDate())
-                .optionSpeciality(Option.builder()
-                        .id(projects.getOptionSpeciality().getId())
-                        .build())
                 .numberOfVotes(projects.getNumberOfVotes())
                 .userId(projects.getUser().getId())
                 .groupStreak(projects.getGroupStreak())
@@ -52,6 +50,8 @@ public class ProjectsDto {
                 .votingpool(projects.isVotingpool())
                 .scolarYear(projects.getScolarYear())
                 .coach(projects.getCoach())
+                .category(projects.getCategory())
+                .optionSpeciality(projects.getOptionSpeciality())
                 .build();
     }
     public static Projects toEntity(ProjectsDto projects){
@@ -59,14 +59,11 @@ public class ProjectsDto {
                 .id(projects.getId())
                 .user(User.builder()
                         .id(projects.getUserId()).build())
-                .category(projects.getCategory())
                 .name(projects.getName())
+                .classe(projects.getClasse())
                 .groupName(projects.getGroupName())
                 .nominated(projects.isNominated())
                 .date(projects.getDate())
-                .optionSpeciality(Option.builder()
-                        .id(projects.getOptionSpeciality().getId())
-                        .build())
                 .numberOfVotes(projects.getNumberOfVotes())
                 .groupStreak(projects.getGroupStreak())
                 .winner(projects.isWinner())
@@ -74,6 +71,8 @@ public class ProjectsDto {
                 .votingpool(projects.isVotingpool())
                 .scolarYear(projects.getScolarYear())
                 .coach(projects.getCoach())
+                .category(projects.getCategory())
+                .optionSpeciality(projects.getOptionSpeciality())
                 .build();
     }
 }

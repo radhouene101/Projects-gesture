@@ -7,8 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.bal.pi.dto.ProjectsDto;
+import tn.bal.pi.entities.CategoryProjects;
+import tn.bal.pi.entities.Option;
 import tn.bal.pi.entities.Projects;
 import tn.bal.pi.entities.TypeNiveau;
+import tn.bal.pi.repositories.CategoryProjectsRepository;
+import tn.bal.pi.repositories.OptionRepository;
 import tn.bal.pi.repositories.ProjectsRepository;
 import tn.bal.pi.services.IProjectsService;
 import tn.bal.pi.validator.ObjectsValidator;
@@ -21,6 +25,11 @@ import java.util.stream.Collectors;
 public class ProjectsServiceImpl implements IProjectsService {
     @Autowired
     private  final ProjectsRepository repository;
+    @Autowired
+    private  final OptionRepository optionRepository;
+
+    @Autowired
+    private final CategoryProjectsRepository categoryProjectsRepository;
     @Autowired
     private  final ObjectsValidator validator;
 
@@ -63,13 +72,13 @@ public class ProjectsServiceImpl implements IProjectsService {
     public List<ProjectsDto> currentlyNominated() {
         return null;
     }
+
     public List<ProjectsDto> getAllWinners(boolean b){
         return repository.findAllByWinner(b)
                 .stream()
                 .map(ProjectsDto::fromEntity)
                 .collect(Collectors.toList());
     }
-
     @Override
     public List<ProjectsDto> getAllwinnersByYear(String scolarYear,boolean b) {
         return repository.findAllByWinnerAndAndScolarYear(b,scolarYear)
@@ -104,5 +113,17 @@ public class ProjectsServiceImpl implements IProjectsService {
     @Override
     public List<ProjectsDto> getAllByNiveau(TypeNiveau niveau) {
         return null;
+    }
+
+    @Override
+    public ProjectsDto customSave(Long optionId, Long categoryId , ProjectsDto dto) {
+        Option option = new Option();
+        option = optionRepository.findById(optionId).get();
+        CategoryProjects categoryProjects = new CategoryProjects();
+        categoryProjects = categoryProjectsRepository.findById(categoryId).get();
+        dto.setCategory(categoryProjects);
+        dto.setOptionSpeciality(option);
+        save(dto);
+        return dto;
     }
 }

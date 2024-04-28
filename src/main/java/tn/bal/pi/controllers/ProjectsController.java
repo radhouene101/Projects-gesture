@@ -20,6 +20,9 @@ import java.util.List;
 public class ProjectsController {
     @Autowired
     IProjectsService service;
+
+
+
     @GetMapping
     public ResponseEntity<List<ProjectsDto>> getAllProjects() {
         return ResponseEntity
@@ -57,7 +60,7 @@ public class ProjectsController {
                 .ok(service.getAllwinnersByYear(scolarYear,true));
     }
     @GetMapping("/scolar-year")
-    public ResponseEntity<List<ProjectsDto>> getAllWinners(boolean b){
+    public ResponseEntity<List<ProjectsDto>> getAllWinners(){
         return ResponseEntity
                 .ok(service.getAllWinners(true));
     }
@@ -70,5 +73,10 @@ public class ProjectsController {
             listOfGroupNames.add(pr.getGroupName());
         }
         return  ResponseEntity.ok(listOfGroupNames);
+    }
+
+    @PostMapping("/save-project/{optionId}/{categoryId}")
+    public ProjectsDto customSave(@PathVariable Long optionId,@PathVariable Long categoryId ,@RequestBody ProjectsDto dto) {
+        return service.customSave(optionId,categoryId,dto);
     }
 }

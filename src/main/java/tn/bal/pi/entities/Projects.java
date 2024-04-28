@@ -26,6 +26,7 @@ public class Projects  {
     private boolean nominated;
     @Column(name="submit_date")
     private Date date;
+    private String classe;
     @Column(name="vote_number")
     private int numberOfVotes;
     @Column(name = "groupStreak")

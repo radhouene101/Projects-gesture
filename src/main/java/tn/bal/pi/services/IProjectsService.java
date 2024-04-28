@@ -7,6 +7,8 @@ import tn.bal.pi.entities.TypeNiveau;
 import java.util.List;
 
 public interface IProjectsService extends AbstractService<ProjectsDto> {
+
+    ProjectsDto customSave(Long optionId , Long categoryId , ProjectsDto dto);
     List<ProjectsDto> getIsNominated(boolean b);
     List<ProjectsDto> currentlyNominated();
     List<ProjectsDto> getAllWinners(boolean b);
