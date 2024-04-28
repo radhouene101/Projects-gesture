@@ -15,12 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("users")
 @Tag(name = "user")
-
 public class UserController {
     @Autowired
     private final IUserService service;
     @PostMapping
     public ResponseEntity<UserDto> saveUser(@RequestBody UserDto user){
+
         return ResponseEntity.ok(service.save(user));
     }
     @GetMapping

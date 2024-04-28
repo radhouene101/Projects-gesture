@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
-
-
+import java.util.List;
 
 
 @Getter
@@ -44,10 +43,12 @@ public class Projects  {
     private String coach;
     private boolean votingpool;
     private String scolarYear;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private  User user;
+    @ManyToOne(optional = true)
+    private Contest contest;
+
 
 
 
